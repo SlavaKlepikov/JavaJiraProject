@@ -21,15 +21,20 @@ public class TestJira {
     private static DashboardPage dashboardPage = new DashboardPage();
 
 
+   @BeforeSuite
+   public void setup() {
+       Configuration.browser = "chrome";
+       open(LoadProperties.getPropValue("urlJira"));
+       loginPage.enterLogin(LoadProperties.getPropValue("login"));
+       loginPage.enterPassword(LoadProperties.getPropValue("password"));
+   }
     @BeforeMethod
-    public void setup(){
-        Configuration.browser = "chrome";
-        open(LoadProperties.getPropValue("urlJira"));
-        loginPage.enterLogin(LoadProperties.getPropValue("login"));
-        loginPage.enterPassword(LoadProperties.getPropValue("password"));
-        loginPage.submitButton();
+       public void setupCookie() {
+           String jsessionCookie = WebDriverRunner.getWebDriver().manage().getCookieNamed("JSESSIONID").getValue();
+           Cookie ck = new Cookie("JSESSIONID", jsessionCookie);
+           WebDriverRunner.getWebDriver().manage().addCookie(ck);
+       }
 
-    }
 
     @Test
     public void testMainPage(){

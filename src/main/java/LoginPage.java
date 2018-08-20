@@ -1,3 +1,6 @@
+import com.codeborne.selenide.WebDriverRunner;
+import org.openqa.selenium.WebDriver;
+
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 
@@ -13,9 +16,10 @@ import static com.codeborne.selenide.Selenide.$;
 
 
         void submitButton(){
-            $("#login-form-submit").click();
+            $("#login-form-submit").click(); }
 
-        }
+
+
 
     }
 
