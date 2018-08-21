@@ -19,21 +19,16 @@ public class TestJira {
     private static LoginPage loginPage = new LoginPage();
     private static SearchPage searchPage = new SearchPage();
     private static DashboardPage dashboardPage = new DashboardPage();
+    private static ManageFiltersPages manageFiltersPages = new ManageFiltersPages();
 
-
-   @BeforeSuite
+   @BeforeMethod
    public void setup() {
        Configuration.browser = "chrome";
        open(LoadProperties.getPropValue("urlJira"));
        loginPage.enterLogin(LoadProperties.getPropValue("login"));
        loginPage.enterPassword(LoadProperties.getPropValue("password"));
+       loginPage.submitButton();
    }
-    @BeforeMethod
-       public void setupCookie() {
-           String jsessionCookie = WebDriverRunner.getWebDriver().manage().getCookieNamed("JSESSIONID").getValue();
-           Cookie ck = new Cookie("JSESSIONID", jsessionCookie);
-           WebDriverRunner.getWebDriver().manage().addCookie(ck);
-       }
 
 
     @Test
@@ -44,8 +39,8 @@ public class TestJira {
 
     @Test
     public void CheckingProjectFilterEpicType()  {
-        dashboardPage.issueButton();
-        dashboardPage.searchOfIssues();
+        dashboardPage.clickIssueButton();
+        dashboardPage.clickSearchOfIssues();
         searchPage.selectProject("QAAUTO-6");
         searchPage.fiterTypeIssue();
         searchPage.selectEpicFilter();
@@ -57,6 +52,25 @@ public class TestJira {
         for (WebElement element: listImg) {
             Assert.assertEquals(element.getAttribute("alt"), "Epic");}
     }
+
+    @Test
+    public void testSaveFilter(){
+        dashboardPage.clickIssueButton();
+        dashboardPage.clickSearchOfIssues();
+        searchPage.clickFindFiltersButton();
+        manageFiltersPages.clickMyButton();
+        manageFiltersPages.deleteFilterIfExist("1 testSaveFilter");
+        dashboardPage.clickIssueButton();
+        dashboardPage.clickSearchOfIssues();
+        searchPage.clickSearchProjectButton();
+        searchPage.selectProjectQAAUTO6("QAAUTO-6");
+        searchPage.clickSaveAsButton();
+        searchPage.enterFilterName("1 testSaveFilter");
+        searchPage.clickSubmitFilterName();
+        searchPage.clickFindFiltersButton();
+        manageFiltersPages.clickMyButton();
+        manageFiltersPages.checkAvailabilityFilter("1 testSaveFilter");
+        manageFiltersPages.deleteFilterIfExist("1 testSaveFilter");}
 
    @AfterMethod
    public void tearDown()

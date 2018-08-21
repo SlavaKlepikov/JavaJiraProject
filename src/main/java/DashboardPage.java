@@ -4,11 +4,11 @@ import static com.codeborne.selenide.Selenide.$;
 
  class DashboardPage {
 
-    void issueButton() {
+    void clickIssueButton() {
         $(By.id("find_link")).click();
     }
 
-    void searchOfIssues() {
+    void clickSearchOfIssues() {
         $("#issues_new_search_link_lnk").click();
     }
 }
