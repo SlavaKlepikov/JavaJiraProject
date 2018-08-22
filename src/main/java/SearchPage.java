@@ -16,10 +16,11 @@ class SearchPage {
         $(By.cssSelector("label[title='" +request+"']")).click(); }
 
     void clickSaveAsButton(){
-        $(By.cssSelector(".aui-button.aui-button-light.save-as-new-filter")).click(); }
+        $(By.className("filter-operations")).shouldBe(Condition.visible, Condition.enabled).click(); }
 
     void enterFilterName(String request){
-        $(By.id("filterName")).setValue(request); }
+        $(By.id("save-filter-dialog")).shouldBe(Condition.visible);
+        $(By.id("filterName")).shouldBe(Condition.visible).shouldBe(Condition.enabled).setValue(request); }
 
 
     void fiterProject(){
