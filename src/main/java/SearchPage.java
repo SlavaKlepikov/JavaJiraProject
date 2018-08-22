@@ -2,6 +2,8 @@ import com.codeborne.selenide.Condition;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+import static com.codeborne.selenide.Condition.attribute;
+import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.$;
 
 class SearchPage {
@@ -27,7 +29,7 @@ class SearchPage {
         $(By.cssSelector("button[data-id='project']")).click();
     }
 
-    public void clickSearchProjectButton(){
+    void clickSearchProjectButton(){
         if ($(By.cssSelector("span.aui-icon.icon-close")).isDisplayed()){
             $(By.cssSelector("span.aui-icon.icon-close")).click();}
         else{}
@@ -36,7 +38,7 @@ class SearchPage {
             $(By.xpath("//a[contains(@class, 'switcher-item active ')]")).shouldBe(Condition.visible).shouldBe(Condition.enabled).click(); }
     }
 
-    public void selectProjectQAAUTO6(String request){
+    void selectProjectQAAUTO6(String request){
         $(By.cssSelector(".criteria-selector.aui-button.aui-button-subtle.drop-arrow")).click();
         $(By.id("searcher-pid-input")).setValue(request);
         $(By.cssSelector("label[title='QAAUTO-6']")).click();
@@ -56,7 +58,7 @@ class SearchPage {
         $(By.cssSelector("input[value='10000']")).shouldBe(Condition.visible).click();
     }
 
-    public void clickFindFiltersButton(){
+    void clickFindFiltersButton(){
         $(By.cssSelector(".find-filters")).click(); }
 
     void clickButtonChangeViews(){
@@ -65,4 +67,11 @@ class SearchPage {
         $("a.aui-list-item-link[data-layout-key='split-view'").click(); }
     void clickListView(){
         $("a.aui-list-item-link[data-layout-key='list-view']").click(); }
+
+    void searchResultsContains(String request){
+    $(".focused").shouldHave(attribute("data-key")).shouldHave(text(request));
+
+    }
+
+
 }

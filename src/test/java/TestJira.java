@@ -1,6 +1,7 @@
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.WebDriverRunner;
+import org.openqa.selenium.By;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -9,6 +10,7 @@ import org.testng.annotations.*;
 
 import java.util.List;
 
+import static com.codeborne.selenide.Condition.attribute;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
@@ -65,6 +67,7 @@ public class TestJira {
         dashboardPage.clickSearchOfIssues();
         searchPage.clickSearchProjectButton();
         searchPage.selectProjectQAAUTO6("QAAUTO-6");
+        searchPage.searchResultsContains("QAAUT6");
         searchPage.clickSaveAsButton();
         searchPage.enterFilterName("1 testSaveFilter");
         searchPage.clickSubmitFilterName();
