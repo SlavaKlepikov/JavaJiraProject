@@ -59,7 +59,9 @@ public class TestJira {
     public void CheckingProjectFilterEpicType()  {
         dashboardPage.clickIssueButton();
         dashboardPage.clickSearchOfIssues();
+        searchPage.clickSearchProjectButton();
         searchPage.selectProject("QAAUTO-6");
+        searchPage.searchResultsContains("QAAUT6");
         searchPage.fiterTypeIssue();
         searchPage.selectEpicFilter();
         searchPage.fiterTypeIssue();
