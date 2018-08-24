@@ -7,36 +7,51 @@ import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.*;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+
 
 import java.util.List;
 
-import static com.codeborne.selenide.Condition.attribute;
-import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
-import static com.codeborne.selenide.Selenide.sleep;
+import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 
 public class TestJira {
 
-    private static LoginPage loginPage = new LoginPage();
-    private static SearchPage searchPage = new SearchPage();
-    private static DashboardPage dashboardPage = new DashboardPage();
-    private static ManageFiltersPages manageFiltersPages = new ManageFiltersPages();
+    private static LoginPage loginPage;
+    private static SearchPage searchPage;
+    private static DashboardPage dashboardPage;
+    private static ManageFiltersPages manageFiltersPages;
+
+  @BeforeSuite
+  public void setupSuite() {
+      loginPage = new LoginPage();
+      searchPage = new SearchPage();
+      dashboardPage = new DashboardPage();
+      manageFiltersPages = new ManageFiltersPages();
+      Configuration.browser = "chrome";
+      open(LoadProperties.getPropValue("urlJira"));
+      loginPage.enterLogin(LoadProperties.getPropValue("login"));
+      loginPage.enterPassword(LoadProperties.getPropValue("password"));
+      loginPage.submitButton();
+      dashboardPage.dashboardPage();
+      loginPage.jsessionCookie = getWebDriver().manage().getCookieNamed("JSESSIONID").getValue();
+      getWebDriver().manage().getCookieNamed("JSESSIONID").getValue();
+      getWebDriver().quit();}
 
    @BeforeMethod
-   public void setup() {
-       Configuration.browser = "chrome";
+   public void setupMethod() {
        open(LoadProperties.getPropValue("urlJira"));
-       loginPage.enterLogin(LoadProperties.getPropValue("login"));
-       loginPage.enterPassword(LoadProperties.getPropValue("password"));
-       loginPage.submitButton();
+       Cookie ck = new Cookie("JSESSIONID", loginPage.jsessionCookie);
+       WebDriverRunner.getWebDriver().manage().addCookie(ck);
+       open(LoadProperties.getPropValue("urlJiraDashboard"));
    }
 
 
     @Test
-    public void testMainPage(){
-        $(".aui-page-header-main").shouldHave(visible, text("System Dashboard"));
+    public void testDashboardPage(){
+        dashboardPage.dashboardPage();
     }
 
 
@@ -79,7 +94,7 @@ public class TestJira {
    @AfterMethod
    public void tearDown()
    {
-       WebDriverRunner.getWebDriver().quit();
+       getWebDriver().quit();
    }
 
 }

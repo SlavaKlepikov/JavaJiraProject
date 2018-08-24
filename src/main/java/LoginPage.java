@@ -6,6 +6,8 @@ import static com.codeborne.selenide.Selenide.$;
 
 
     class LoginPage {
+
+        String jsessionCookie;
         void enterLogin(String login){
             $("#login-form-username").shouldBe(visible).setValue(login);
         }
