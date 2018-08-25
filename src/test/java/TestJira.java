@@ -68,7 +68,7 @@ public class TestJira {
         searchPage.clickButtonChangeViews();
         searchPage.clickDetailView();
 
-        List<SelenideElement> listImg= $(".list-content").$$("img");
+        List<SelenideElement> listImg= searchPage.issueListContentType();
         for (WebElement element: listImg) {
             Assert.assertEquals(element.getAttribute("alt"), "Epic");}
     }

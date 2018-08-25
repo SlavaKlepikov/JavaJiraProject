@@ -1,6 +1,9 @@
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+
+import java.util.List;
 
 import static com.codeborne.selenide.Condition.attribute;
 import static com.codeborne.selenide.Condition.text;
@@ -70,8 +73,10 @@ class SearchPage {
 
     void searchResultsContains(String request){
     $(".focused").shouldHave(attribute("data-key")).shouldHave(text(request));
-
     }
+
+    List<SelenideElement> issueListContentType(){
+    return $(".list-content").$$("img");}
 
 
 }
