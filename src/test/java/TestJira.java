@@ -1,3 +1,4 @@
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.WebDriverRunner;
@@ -13,6 +14,8 @@ import java.net.URL;
 
 import java.util.List;
 
+import static com.codeborne.selenide.Condition.attribute;
+import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
@@ -67,10 +70,14 @@ public class TestJira {
         searchPage.fiterTypeIssue();
         searchPage.clickButtonChangeViews();
         searchPage.clickDetailView();
+        searchPage.searchResultsTypeContains("Epic");
 
-        List<SelenideElement> listImg= searchPage.issueListContentType();
+        List<SelenideElement> listImg= searchPage.issueListContainType();
         for (WebElement element: listImg) {
-            Assert.assertEquals(element.getAttribute("alt"), "Epic");}
+            Assert.assertEquals(element.getAttribute("alt"), "Epic");
+
+
+        }
     }
 
     @Test

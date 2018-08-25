@@ -72,11 +72,16 @@ class SearchPage {
         $("a.aui-list-item-link[data-layout-key='list-view']").click(); }
 
     void searchResultsContains(String request){
-    $(".focused").shouldHave(attribute("data-key")).shouldHave(text(request));
+    $(".focused").shouldBe(Condition.visible).shouldHave(attribute("data-key")).shouldHave(text(request));
     }
 
-    List<SelenideElement> issueListContentType(){
-    return $(".list-content").$$("img");}
+    void searchResultsTypeContains(String request){
+        $(".list-content").shouldBe(Condition.visible).$("img").shouldHave(attribute("alt", request));
+
+    }
+
+    List<SelenideElement> issueListContainType(){
+    return $(".list-content").shouldBe(Condition.visible).$$("img");}
 
 
 }
