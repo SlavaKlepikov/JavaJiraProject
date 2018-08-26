@@ -8,15 +8,8 @@ import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.*;
 
-import java.net.MalformedURLException;
-import java.net.URL;
-
-
 import java.util.List;
-
-import static com.codeborne.selenide.Condition.attribute;
-import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Selenide.$;
+import java.util.Set;
 import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 
@@ -51,13 +44,11 @@ public class TestJira {
        open(LoadProperties.getPropValue("urlJiraDashboard"));
    }
 
-
     @Test
     public void testDashboardPage(){
         dashboardPage.dashboardPage();
     }
-
-
+    
     @Test
     public void CheckingProjectFilterEpicType()  {
         dashboardPage.clickIssueButton();
@@ -71,13 +62,9 @@ public class TestJira {
         searchPage.clickButtonChangeViews();
         searchPage.clickDetailView();
         searchPage.searchResultsTypeContains("Epic");
-
         List<SelenideElement> listImg= searchPage.issueListContainType();
         for (WebElement element: listImg) {
-            Assert.assertEquals(element.getAttribute("alt"), "Epic");
-
-
-        }
+            Assert.assertEquals(element.getAttribute("alt"), "Epic"); }
     }
 
     @Test
@@ -100,11 +87,25 @@ public class TestJira {
         manageFiltersPages.checkAvailabilityFilter("1 testSaveFilter");
         manageFiltersPages.deleteFilterIfExist("1 testSaveFilter");}
 
+
+    @Test
+    public void testJiraCoreHelpPageOpenNewWindow(){
+    dashboardPage.dashboardPage();
+    String handleDashboard= getWebDriver().getWindowHandle();
+    dashboardPage.clickHelpMenu();
+    dashboardPage.clickJiraCoreHelp();
+    Set<String> handles = getWebDriver().getWindowHandles();
+    Assert.assertEquals(handles.size(),2);
+    handles.remove(handleDashboard);
+    String handleJavaCoreHelp=handles.iterator().next();
+    getWebDriver().switchTo().window(handleJavaCoreHelp);
+    dashboardPage.jiraCoreHelpPage();
+  }
+
    @AfterMethod
    public void tearDown()
    {
        getWebDriver().quit();
    }
-
 }
 

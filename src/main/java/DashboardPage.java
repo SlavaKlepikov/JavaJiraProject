@@ -17,4 +17,15 @@ import static com.codeborne.selenide.Selenide.$;
      public void dashboardPage(){
          $(".aui-page-header-main").shouldHave(visible, text("System Dashboard"));
      }
+
+     void clickHelpMenu()
+     {$(By.id("system-help-menu")).shouldBe(visible).click();}
+
+     void clickJiraCoreHelp()
+     {$(By.id("view_core_help")).shouldBe(visible).click();}
+
+     public void jiraCoreHelpPage(){
+         $("a.cac-header-logo.logo").shouldHave(visible, text("Jira Core Support"));
+     }
+
 }
