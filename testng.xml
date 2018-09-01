@@ -8,15 +8,15 @@
         </classes>
     </test>
 
-    <test name="TestBrowserFireFox">
-        <parameter name="browser" value="firefox"/>
-        <classes>
-            <class name="TestJira" >
-            <methods>
-                <exclude name="testJiraCoreHelpPageOpenNewTab"/>
-            </methods>
-            </class>
-        </classes>
-    </test>
+    <!--<test name="TestBrowserFireFox">-->
+        <!--<parameter name="browser" value="firefox"/>-->
+        <!--<classes>-->
+            <!--<class name="TestJira" >-->
+            <!--<methods>-->
+                <!--<exclude name="testJiraCoreHelpPageOpenNewTab"/>-->
+            <!--</methods>-->
+            <!--</class>-->
+        <!--</classes>-->
+    <!--</test>-->
 
 </suite>

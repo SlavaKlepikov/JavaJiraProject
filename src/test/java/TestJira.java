@@ -21,8 +21,9 @@ public class TestJira {
     private static ManageFiltersPages manageFiltersPages;
 
 
-    @Parameters("browser")
+
     @BeforeTest
+    @Parameters("browser")
     public void setupSuite(String browser) {
       loginPage = new LoginPage();
       searchPage = new SearchPage();
