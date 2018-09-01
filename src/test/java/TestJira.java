@@ -69,9 +69,9 @@ public class TestJira {
       data[0][1]=LoadProperties.getPropValue("password");
       data[0][2]=LoadProperties.getPropValue("urlJira");
 
-      data[1][0]=LoadProperties.getPropValue("login");
-      data[1][1]=LoadProperties.getPropValue("password");
-      data[1][2]=LoadProperties.getPropValue("urlJira");
+      data[1][0]=LoadProperties.getPropValue("login1");
+      data[1][1]=LoadProperties.getPropValue("password1");
+      data[1][2]=LoadProperties.getPropValue("urlJira1");
         return data;
     }
 
