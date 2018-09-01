@@ -20,18 +20,20 @@ public class TestJira {
     private static DashboardPage dashboardPage;
     private static ManageFiltersPages manageFiltersPages;
 
-  @BeforeSuite
-  public void setupSuite() {
+
+    @Parameters("browser")
+    @BeforeTest
+    public void setupSuite(String browser) {
       loginPage = new LoginPage();
       searchPage = new SearchPage();
       dashboardPage = new DashboardPage();
       manageFiltersPages = new ManageFiltersPages();
-      Configuration.browser = "chrome";
+      Configuration.browser = browser;
       open(LoadProperties.getPropValue("urlJira"));
       loginPage.enterLogin(LoadProperties.getPropValue("login"));
       loginPage.enterPassword(LoadProperties.getPropValue("password"));
       loginPage.submitButton();
-      dashboardPage.dashboardPage();
+      dashboardPage.atDashboardPage();
       loginPage.jsessionCookie = getWebDriver().manage().getCookieNamed("JSESSIONID").getValue();
       getWebDriver().manage().getCookieNamed("JSESSIONID").getValue();
       getWebDriver().quit();}
@@ -46,7 +48,7 @@ public class TestJira {
 
     @Test
     public void testDashboardPage(){
-        dashboardPage.dashboardPage();
+        dashboardPage.atDashboardPage();
     }
 
     @Test
@@ -89,8 +91,8 @@ public class TestJira {
 
 
     @Test
-    public void testJiraCoreHelpPageOpenNewTab(){
-        dashboardPage.dashboardPage();
+    public void testJiraCoreHelpPageOpenNewTab() {
+        dashboardPage.atDashboardPage();
         String handleDashboard= getWebDriver().getWindowHandle();
         dashboardPage.clickHelpMenu();
         dashboardPage.clickJiraCoreHelp();

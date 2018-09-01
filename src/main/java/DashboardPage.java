@@ -14,7 +14,7 @@ import static com.codeborne.selenide.Selenide.$;
         $("#issues_new_search_link_lnk").click();
     }
 
-     public void dashboardPage(){
+     public void atDashboardPage(){
          $(".aui-page-header-main").shouldHave(visible, text("System Dashboard"));
      }
 
