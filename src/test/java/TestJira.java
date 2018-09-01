@@ -48,7 +48,7 @@ public class TestJira {
     public void testDashboardPage(){
         dashboardPage.dashboardPage();
     }
-    
+
     @Test
     public void CheckingProjectFilterEpicType()  {
         dashboardPage.clickIssueButton();
@@ -61,8 +61,8 @@ public class TestJira {
         searchPage.fiterTypeIssue();
         searchPage.clickButtonChangeViews();
         searchPage.clickDetailView();
-        searchPage.searchResultsTypeContains("Epic");
-        List<SelenideElement> listImg= searchPage.issueListContainType();
+        searchPage.checkTypeOfFirstPositionInIssueList("Epic");
+        List<SelenideElement> listImg= searchPage.fullListSelenideElementsImg();
         for (WebElement element: listImg) {
             Assert.assertEquals(element.getAttribute("alt"), "Epic"); }
     }
@@ -89,17 +89,17 @@ public class TestJira {
 
 
     @Test
-    public void testJiraCoreHelpPageOpenNewWindow(){
-    dashboardPage.dashboardPage();
-    String handleDashboard= getWebDriver().getWindowHandle();
-    dashboardPage.clickHelpMenu();
-    dashboardPage.clickJiraCoreHelp();
-    Set<String> handles = getWebDriver().getWindowHandles();
-    Assert.assertEquals(handles.size(),2);
-    handles.remove(handleDashboard);
-    String handleJavaCoreHelp=handles.iterator().next();
-    getWebDriver().switchTo().window(handleJavaCoreHelp);
-    dashboardPage.jiraCoreHelpPage();
+    public void testJiraCoreHelpPageOpenNewTab(){
+        dashboardPage.dashboardPage();
+        String handleDashboard= getWebDriver().getWindowHandle();
+        dashboardPage.clickHelpMenu();
+        dashboardPage.clickJiraCoreHelp();
+        Set<String> handles = getWebDriver().getWindowHandles();
+        Assert.assertEquals(handles.size(),2);
+        handles.remove(handleDashboard);
+        String handleJavaCoreHelp=handles.iterator().next();
+        getWebDriver().switchTo().window(handleJavaCoreHelp);
+        dashboardPage.jiraCoreHelpPage();
   }
 
    @AfterMethod

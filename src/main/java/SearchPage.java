@@ -75,13 +75,16 @@ class SearchPage {
     $(".focused").shouldBe(Condition.visible).shouldHave(attribute("data-key")).shouldHave(text(request));
     }
 
-    void searchResultsTypeContains(String request){
-        $(".list-content").shouldBe(Condition.visible).$("img").shouldHave(attribute("alt", request));
-
+    public SelenideElement issueList(){
+       return  $(".list-content").shouldBe(Condition.visible);
     }
 
-    List<SelenideElement> issueListContainType(){
-    return $(".list-content").shouldBe(Condition.visible).$$("img");}
+    public void checkTypeOfFirstPositionInIssueList(String type){
+        issueList().$("img").shouldHave(attribute("alt", type));
+    }
+
+    List<SelenideElement> fullListSelenideElementsImg(){
+    return issueList().$$("img");}
 
 
 }
