@@ -39,6 +39,7 @@ public class TestJira {
       getWebDriver().manage().getCookieNamed("JSESSIONID").getValue();
       getWebDriver().quit();}
 
+
    @BeforeMethod
    public void setupMethod() {
        open(LoadProperties.getPropValue("urlJira"));
@@ -50,6 +51,28 @@ public class TestJira {
     @Test
     public void testDashboardPage(){
         dashboardPage.atDashboardPage();
+    }
+
+    @Test(dataProvider = "login-provider")
+    public void testLoginMethod(String login,String password, String urlJira) {
+        open(urlJira);
+        loginPage.enterLogin(login);
+        loginPage.enterPassword(password);
+        loginPage.submitButton();
+        dashboardPage.atDashboardPage();
+    }
+
+    @DataProvider(name="login-provider")
+    public Object[][] dataProviderMethod(){
+      Object [][] data =  new Object[2][3];
+      data[0][0]=LoadProperties.getPropValue("login");
+      data[0][1]=LoadProperties.getPropValue("password");
+      data[0][2]=LoadProperties.getPropValue("urlJira");
+
+      data[1][0]=LoadProperties.getPropValue("login");
+      data[1][1]=LoadProperties.getPropValue("password");
+      data[1][2]=LoadProperties.getPropValue("urlJira");
+        return data;
     }
 
     @Test
