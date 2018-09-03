@@ -1,22 +1,20 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
-<suite name="TestSuite">
-    <test name="TestBrowserChrome">
+<suite name="TestSuite" verbose="10"  >
+    <test name="TestBrowserChrome" verbose="10">
         <parameter name="browser" value="chrome"/>
         <classes>
            <class name="TestJira" />
         </classes>
     </test>
-
-    <!--<test name="TestBrowserFireFox">-->
-        <!--<parameter name="browser" value="firefox"/>-->
-        <!--<classes>-->
-            <!--<class name="TestJira" >-->
-            <!--<methods>-->
-                <!--<exclude name="testJiraCoreHelpPageOpenNewTab"/>-->
-            <!--</methods>-->
-            <!--</class>-->
-        <!--</classes>-->
-    <!--</test>-->
-
+    <test name="TestBrowserFireFox" verbose="10">
+        <parameter name="browser" value="firefox"/>
+        <classes>
+            <class name="TestJira" >
+            <methods>
+                <exclude name="testJiraCoreHelpPageOpenNewTab"/>
+            </methods>
+            </class>
+        </classes>
+    </test>
 </suite>
