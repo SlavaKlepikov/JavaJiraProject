@@ -2,13 +2,13 @@
 
 <suite name="TestSuite" verbose="10"  >
     <test name="TestBrowserChrome" verbose="10">
-        <parameter name="browser" value="firefox"/>
+        <parameter name="browser" value="Firefox"/>
         <classes>
            <class name="TestJira" />
         </classes>
     </test>
     <test name="TestBrowserFireFox" verbose="10">
-        <parameter name="browser" value="firefox"/>
+        <parameter name="browser" value="Firefox"/>
         <classes>
             <class name="TestJira" >
             <methods>
