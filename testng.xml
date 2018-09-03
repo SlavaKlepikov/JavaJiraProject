@@ -2,7 +2,7 @@
 
 <suite name="TestSuite" verbose="10"  >
     <test name="TestBrowserChrome" verbose="10">
-        <parameter name="browser" value="Firefox"/>
+        <parameter name="browser" value="InternetExplorer"/>
         <classes>
            <class name="TestJira" />
         </classes>
