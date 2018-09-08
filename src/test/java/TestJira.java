@@ -8,6 +8,7 @@ import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.*;
 
+import java.security.acl.Group;
 import java.util.List;
 import java.util.Set;
 import static com.codeborne.selenide.Selenide.open;
@@ -22,7 +23,7 @@ public class TestJira {
 
 
 
-    @BeforeTest
+    @BeforeTest(alwaysRun = true)
     @Parameters("browser")
     public void setupSuite(String browser) {
       loginPage = new LoginPage();
@@ -40,7 +41,7 @@ public class TestJira {
       getWebDriver().quit();}
 
 
-   @BeforeMethod
+   @BeforeMethod (alwaysRun = true)
    public void setupMethod() {
        open(LoadProperties.getPropValue("urlJira"));
        Cookie ck = new Cookie("JSESSIONID", loginPage.jsessionCookie);
@@ -48,12 +49,12 @@ public class TestJira {
        open(LoadProperties.getPropValue("urlJiraDashboard"));
    }
 
-    @Test
+    @Test (groups = "login")
     public void testDashboardPage(){
         dashboardPage.atDashboardPage();
     }
 
-    @Test(dataProvider = "login-provider")
+    @Test(dataProvider = "login-provider", dependsOnGroups = "login")
     public void testLoginMethod(String login,String password, String urlJira) {
         open(urlJira);
         loginPage.enterLogin(login);
@@ -69,13 +70,13 @@ public class TestJira {
       data[0][1]=LoadProperties.getPropValue("password");
       data[0][2]=LoadProperties.getPropValue("urlJira");
 
-      data[1][0]=LoadProperties.getPropValue("login1");
-      data[1][1]=LoadProperties.getPropValue("password1");
-      data[1][2]=LoadProperties.getPropValue("urlJira1");
+      data[1][0]=LoadProperties.getPropValue("login2");
+      data[1][1]=LoadProperties.getPropValue("password2");
+      data[1][2]=LoadProperties.getPropValue("urlJira2");
         return data;
     }
 
-    @Test
+    @Test (dependsOnGroups = "login",groups ="regression")
     public void CheckingProjectFilterEpicType()  {
         dashboardPage.clickIssueButton();
         dashboardPage.clickSearchOfIssues();
@@ -93,7 +94,7 @@ public class TestJira {
             Assert.assertEquals(element.getAttribute("alt"), "Epic"); }
     }
 
-    @Test
+    @Test (dependsOnGroups = "login",groups ="regression")
     public void testSaveFilter(){
         dashboardPage.clickIssueButton();
         dashboardPage.clickSearchOfIssues();
@@ -114,7 +115,7 @@ public class TestJira {
         manageFiltersPages.deleteFilterIfExist("1 testSaveFilter");}
 
 
-    @Test
+    @Test (dependsOnGroups = "login",groups ="regression" )
     public void testJiraCoreHelpPageOpenNewTab() {
         dashboardPage.atDashboardPage();
         String handleDashboard= getWebDriver().getWindowHandle();
@@ -127,6 +128,15 @@ public class TestJira {
         getWebDriver().switchTo().window(handleJavaCoreHelp);
         dashboardPage.jiraCoreHelpPage();
   }
+
+    @Test(dependsOnGroups = "login", groups = "negative")
+    public void testLoginNegativeMethod() {
+        open(LoadProperties.getPropValue("urlJira"));
+        loginPage.enterLogin(LoadProperties.getPropValue("loginFail"));
+        loginPage.enterPassword(LoadProperties.getPropValue("passwordFail"));
+        loginPage.submitButton();
+        Assert.assertEquals(loginPage.errorMessegeFailLogin().getText(),"Sorry, your username and password are incorrect - please try again.");
+        }
 
    @AfterMethod
    public void tearDown()
