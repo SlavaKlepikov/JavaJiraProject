@@ -2,7 +2,8 @@ import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 
-public class ITestListenerClass implements ITestListener  {
+
+public class ITestListenerClass implements ITestListener {
     @Override
     public void onTestStart(ITestResult iTestResult) {
         System.out.println("onTestStart: " +  getTestMethodName(iTestResult) + " start");
