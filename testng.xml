@@ -1,22 +1,50 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
-<suite name="TestSuite">
-    <test name="TestBrowserChrome">
-        <parameter name="browser" value="chrome"/>
+<suite name="TestSuite" verbose="10"  >
+    <listeners>
+        <listener class-name="ITestListenerClass" />
+    </listeners>
+    <test name="TestBrowserChromeALL" verbose="10">
+        <parameter name="browser" value="Chrome"/>
+        <groups>
+            <define name="all">
+                <include name="login"/>
+                <include name="regression"/>
+                <include name="negative"/>
+            </define>
+            <run>
+                <include name="all"/>
+            </run>
+        </groups>
         <classes>
-           <class name="TestJira" />
+            <class name="TestJira">
+        </class>
         </classes>
     </test>
-
-    <!--<test name="TestBrowserFireFox">-->
-        <!--<parameter name="browser" value="firefox"/>-->
-        <!--<classes>-->
-            <!--<class name="TestJira" >-->
-            <!--<methods>-->
-                <!--<exclude name="testJiraCoreHelpPageOpenNewTab"/>-->
-            <!--</methods>-->
-            <!--</class>-->
-        <!--</classes>-->
-    <!--</test>-->
-
+    <test name="TestBrowserChromeNegative" verbose="10">
+        <parameter name="browser" value="Chrome"/>
+        <groups>
+            <define name="negative">
+                <include name="login"/>
+                <include name="negative"/>
+            </define>
+            <run>
+                <include name="negative"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="TestJira">
+            </class>
+        </classes>
+    </test>
+    <test name="TestBrowserFireFox" verbose="10">
+        <parameter name="browser" value="Firefox"/>
+        <classes>
+            <class name="TestJira" >
+            <methods>
+                <exclude name="testJiraCoreHelpPageOpenNewTab"/>
+            </methods>
+            </class>
+        </classes>
+    </test>
 </suite>

@@ -1,5 +1,7 @@
 import com.codeborne.selenide.WebDriverRunner;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
@@ -18,10 +20,10 @@ import static com.codeborne.selenide.Selenide.$;
 
 
         void submitButton(){
-            $("#login-form-submit").click(); }
+            $("#login-form-submit").click();}
 
-
-
-
+        public WebElement errorMessegeFailLogin(){
+           return $("div.aui-message.error");
+            }
     }
 
