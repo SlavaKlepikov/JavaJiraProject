@@ -1,42 +1,46 @@
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 
 
 public class ITestListenerClass implements ITestListener {
+    private static final Logger LOGGER = LogManager.getLogger(ITestListener.class.getName());
+
     @Override
     public void onTestStart(ITestResult iTestResult) {
-        System.out.println("onTestStart: " +  iTestResult.getName() + " start");
+        LOGGER.info("onTestStart: " +  iTestResult.getName() + " start" );
     }
 
     @Override
     public void onTestSuccess(ITestResult iTestResult) {
-        System.out.println("onTestSuccess: " +  iTestResult.getName() + " succeed");
+        LOGGER.info("onTestSuccess: " +  iTestResult.getName() + " succeed" );
     }
 
     @Override
     public void onTestFailure(ITestResult iTestResult) {
-        System.out.println("onTestFailure: " +  iTestResult.getName() + " failed");
+        LOGGER.info("onTestFailure: " +  iTestResult.getName() + " failed" );
     }
 
     @Override
     public void onTestSkipped(ITestResult iTestResult) {
-        System.out.println("onTestSkipped: "+  iTestResult.getName() + " skipped");
+        LOGGER.info("onTestSkipped: "+  iTestResult.getName() + " skipped" );
     }
 
     @Override
     public void onTestFailedButWithinSuccessPercentage(ITestResult iTestResult) {
-        System.out.println("onTestFailedButWithinSuccessPercentage: " + iTestResult.getName());
+        LOGGER.info("onTestFailedButWithinSuccessPercentage: " + iTestResult.getName() );
     }
 
     @Override
     public void onStart(ITestContext iTestContext) {
-        System.out.println("onStart: " + iTestContext.getName());
+        LOGGER.info("onStart: " + iTestContext.getName() );
     }
 
     @Override
     public void onFinish(ITestContext iTestContext) {
-        System.out.println("onFinish: " + iTestContext.getName());
+        LOGGER.info("onFinish: " + iTestContext.getName() );
     }
 
 }

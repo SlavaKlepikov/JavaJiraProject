@@ -1,0 +1,31 @@
+{
+  "configuration": {
+    "name": "Default",
+    "appenders": {
+      "RollingFile": {
+        "name":"File",
+        "fileName":"D:/itHillel/JavaJiraProject/logs/JavaJiraProject.log",
+        "filePattern":"D:/itHillel/JavaJiraProject/logs/JavaJiraProject-backup-%d{MM-dd-yy-HH-mm-ss}-%i.log.gz",
+        "PatternLayout": {
+          "pattern":"%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n"
+        },
+        "Policies": {
+          "SizeBasedTriggeringPolicy": {
+            "size":"10 MB"
+          }
+        },
+        "DefaultRolloverStrategy": {
+          "max":"10"
+        }
+      }
+    },
+    "loggers": {
+      "root": {
+        "level":"debug",
+        "appender-ref": {
+          "ref":"File"
+        }
+      }
+    }
+  }
+}

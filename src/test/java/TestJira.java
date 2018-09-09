@@ -2,9 +2,11 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.WebDriverRunner;
+import com.codeborne.selenide.testng.TextReport;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.testng.Assert;
 import org.testng.annotations.*;
 
@@ -21,8 +23,6 @@ public class TestJira {
     private static DashboardPage dashboardPage;
     private static ManageFiltersPages manageFiltersPages;
 
-
-
     @BeforeTest(alwaysRun = true)
     @Parameters("browser")
     public void setupSuite(String browser) {
@@ -38,7 +38,8 @@ public class TestJira {
       dashboardPage.atDashboardPage();
       loginPage.jsessionCookie = getWebDriver().manage().getCookieNamed("JSESSIONID").getValue();
       getWebDriver().manage().getCookieNamed("JSESSIONID").getValue();
-      getWebDriver().quit();}
+      getWebDriver().quit();
+    }
 
 
    @BeforeMethod (alwaysRun = true)

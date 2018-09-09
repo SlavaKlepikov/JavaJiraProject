@@ -1,6 +1,3 @@
-import com.codeborne.selenide.WebDriverRunner;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import static com.codeborne.selenide.Condition.visible;
@@ -11,7 +8,7 @@ import static com.codeborne.selenide.Selenide.$;
 
         String jsessionCookie;
         void enterLogin(String login){
-            $("#login-form-username").shouldBe(visible).setValue(login);
+         $("#login-form-username").shouldBe(visible).setValue(login);
         }
 
         void enterPassword(String password){
