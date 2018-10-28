@@ -28,8 +28,8 @@
     "loggers": {
       "root": {
         "level":"debug",
-        "appender-ref":[ {
-          "ref":"File", "level":"debug"},{"ref":"STDOUT", "level":"debug"}
+        "appender-ref":[
+          {"ref":"STDOUT", "level":"debug"}
         ]
       }
     }
