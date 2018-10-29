@@ -3,6 +3,7 @@ import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.WebDriverRunner;
 import com.codeborne.selenide.testng.TextReport;
+import io.qameta.allure.Description;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebElement;
@@ -55,6 +56,7 @@ public class TestJira {
         dashboardPage.atDashboardPage();
     }
 
+    @Description("Test Login")
     @Test(dataProvider = "login-provider", dependsOnGroups = "login")
     public void testLoginMethod(String login,String password, String urlJira) {
         open(urlJira);
