@@ -1,6 +1,6 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
-<suite name="TestSuite" verbose="10"  >
+<suite name="TestSuite" verbose="10" parallel="false"  >
     <listeners>
         <listener class-name="ITestListenerClass" />
     </listeners>

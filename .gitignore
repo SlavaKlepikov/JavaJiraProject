@@ -33,3 +33,6 @@ target/
 
 build/
 logs/
+
+#Allure
+allure-results/
